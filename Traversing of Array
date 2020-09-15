@@ -1,0 +1,16 @@
+#include<stdio.h>
+void main()
+{
+	int arr[20],i,size;
+	printf("Size of the array?\n");
+	scanf(" %d",&size);
+	
+	for(i=0;i<size;i++)
+	{
+		scanf(" %d",&arr[i]);
+	}
+	for(i=0;i<size;i++)
+	{
+		printf(" %d",arr[i]);
+	}
+}
