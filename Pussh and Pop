@@ -1,0 +1,45 @@
+struct stack
+{
+	int arr[5];
+	int tos;
+};
+void push(struct stack *,int);
+int pop(struct stack *);
+
+void main()
+{
+	int x,i;
+	struct stack s;
+	
+	for(i=1;i<=6;i++)
+	{
+		printf("Enter a number to be pushed\n");
+		scanf("%d",&x);
+		push(&s,x);	
+	}	
+	for(i=1;i<=6;i++)
+	{
+		x=pop(&s);
+	}
+}
+void push(struct stack *p,int x)
+{
+	if(p->tos==4)
+	{
+		printf("Stack Overflow\n");
+		return ;
+	}
+	p->tos=p->tos+1;      //pointer of structure is used by -> and not by .(dot).
+	p->arr[p->tos]=x;
+}
+int pop(struct stack *p)
+{
+	int x;
+	if(p->tos==-1)
+	{
+		printf("Stack Underflow");
+		return 0;
+	}
+	x=p->arr[p->tos];
+	p->tos=p->tos-1;
+}
