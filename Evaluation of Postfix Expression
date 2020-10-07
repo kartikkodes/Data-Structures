@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<math.h>
+struct stack{
+    float arr[10];
+    int tos;
+};
+
+void push(struct stack *,float);
+float pop(struct stack *);
+int isoprnd(char);
+float calculate(float,float,char);
+float solve(char[]);
+
+void main()
+{
+    char postfix[20];
+    float ans;
+    printf("Enter valid postfix expression\n");
+    scanf(" %s",postfix);
+    ans=solve(postfix);
+    printf("Resut of the %s is %f", postfix,ans);
+    getch();
+}
+
+isoprnd(char ch)
+{
+    return(ch>=48 && ch<=57);
+}
+
+float calculate(float op1,float op2,char ch)
+{
+    switch (ch)
+    {
+        case '+':
+        return (op1 +op2);
+    case '-':
+    return (op1-op2);
+    case '*':
+    return (op1 * op2);
+    case '/':
+    return (op1 / op2);
+    case '$':
+    return (pow(op1,op2));
+    case '%':
+    return(fmod(op1,op2));
+    default:
+    return(0.0);
+    }
+}
+
+void push(struct stack *p,float x)
+{
+    if(p->tos==9)
+    {
+        printf(" Stack Overflow\n");
+        return ;
+    }
+
+    p->tos=p->tos +1;
+    p->arr[p->tos]=x;
+}
+float pop(struct stack *p)
+{
+    float x;
+    if(p->tos==1)
+    {
+        printf(" Stack Underflow\n");
+        return 0.0;
+    }
+    x=p->arr[p->tos];
+    p->tos=p->tos -1;
+    return(x);
+}
+
+float solve(char postfix[])
+{
+    int i;
+    char ch;
+    float op1,op2,ans;
+    struct satck s;
+    s.tos=-1;
+    for(i=0;postfix[i]!='\0';i++)
+    {
+        ch=postfix[i];
+        if(isoprnd(ch)==1)
+        {
+            push(&s,(float)(ch-48));
+        }
+        else
+        {
+            op2=pop(&s);
+            op1=pop(&s);
+            ans=calculate(op1,op2,ch);
+            push(&s,ans);
+        }
+        
+    }
+}
