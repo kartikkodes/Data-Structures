@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node * next;
+};
+
+void traversal(struct node * ptr){
+    while (ptr!=NULL)
+    {
+        printf("Element is %d\n",ptr->data);
+        ptr=ptr->next;
+    }
+    
+}
+
+struct node * insertatmid(struct node * second, int data, int index){
+    struct node * ptr=(struct node *)malloc(sizeof(struct node));
+    struct node * p=second;
+    int i =0;
+    
+    while (i!=index-1)
+    {
+        p=p->next;
+        i++;
+    }
+    ptr->data=data;
+    ptr->next=p->next;
+    p->next=ptr;
+
+}
+
+int main(){
+
+    struct node * head;
+    struct node * second;
+    struct node * third;
+    struct node * fourth;
+
+    head=(struct node *)malloc(sizeof(struct node));
+    second=(struct node *)malloc(sizeof(struct node));
+    third=(struct node *)malloc(sizeof(struct node));
+    fourth=(struct node *)malloc(sizeof(struct node));
+
+    head->data=50;
+    head->next=second;
+
+    second->data=55;
+    second->next=third;
+
+    third->data=60;
+    third->next=fourth;
+
+    fourth->data=65;
+    fourth->next=NULL;
+
+    traversal(head);
+    second=insertatmid(second,56,2);
+    printf("\n New list \n\n");
+    traversal(head);
+}
