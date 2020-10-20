@@ -1,62 +1,82 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node{
+struct node
+{
     int data;
     struct node * next;
 };
 
-void traversal(struct node * ptr){
+void traversal(struct node * ptr)
+{
     while (ptr!=NULL)
     {
-        printf("Element is %d\n",ptr->data);
+        printf("%d\n",ptr->data);
         ptr=ptr->next;
     }
     
 }
 
-struct node * insertatmid(struct node * second, int data, int index){
+struct node * first(struct node *head,int data)         //for insertion at first
+{
     struct node * ptr=(struct node *)malloc(sizeof(struct node));
-    struct node * p=second;
-    int i =0;
-    
-    while (i!=index-1)
-    {
-        p=p->next;
-        i++;
-    }
+    ptr->next=head;
+    ptr->data=data;
+    return ptr;
+}
+
+struct node * atindex(struct node * node_pointer,int data)
+{
+    struct node * ptr=(struct node *)malloc(sizeof(struct node));
+    struct node * p=node_pointer;
     ptr->data=data;
     ptr->next=p->next;
     p->next=ptr;
-
 }
 
-int main(){
 
+
+int main()
+{
     struct node * head;
     struct node * second;
     struct node * third;
     struct node * fourth;
 
-    head=(struct node *)malloc(sizeof(struct node));
-    second=(struct node *)malloc(sizeof(struct node));
-    third=(struct node *)malloc(sizeof(struct node));
-    fourth=(struct node *)malloc(sizeof(struct node));
+    head=(struct node *) malloc (sizeof(struct node));
+    second=(struct node *) malloc (sizeof(struct node));
+    third=(struct node *) malloc (sizeof(struct node));
+    fourth=(struct node *) malloc (sizeof(struct node));
 
-    head->data=50;
+    head->data=70;
     head->next=second;
 
-    second->data=55;
+    second->data=80;
     second->next=third;
 
-    third->data=60;
+    third->data=90;
     third->next=fourth;
 
-    fourth->data=65;
+    fourth->data=100;
     fourth->next=NULL;
 
+    printf("This is the former ll\n");
     traversal(head);
-    second=insertatmid(second,56,2);
-    printf("\n New list \n\n");
+    printf("This is the new ll\n");
+   // head=first(head,99);            //here head is very imp as the function will return a struct node * and only head can store it if u want to insert at first.
+    third = atindex(third,88);
     traversal(head);
+    return 0;
+
 }
+
+
+
+//[head]->[second]->[third]->[fourth]
+//      ^          ^        ^
+//      |          |        |
+//      |          |        |
+//    (head)    (second)  (third)      these are the node where you want the ptr to be returned at , if you want to insert after first node,keep the retrun value as head
+//                                      if you want to insert after and vefore second and third node respectively,kep the return thign as second amd so on.  
+//    short and simple thing is, after which node/with which node you want to insert the new data,return the vaue to that point only.       
