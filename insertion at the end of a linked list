@@ -1,37 +1,36 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node{
+struct node
+{
     int data;
     struct node * next;
 };
 
-void traversal(struct node * ptr){
-
-    while(ptr!=NULL)
+void traversal(struct node * head)
+{
+    struct node * p= head;
+    while (p!=NULL)
     {
-        printf("Element is %d\n",ptr->data);
-        ptr=ptr->next;
-    }
-}
-
-struct node * insertatend(struct node * head , int data){
-    struct node * ptr= (struct node *)malloc(sizeof(struct node));
-    ptr->data=data;
-
-    struct node*p=head;
-
-    while(p->next!=NULL){
+        printf("Element is %d\n",p->data);
         p=p->next;
     }
-    p->next=ptr;
-    ptr->next=NULL;
-    return head;
-
+    
 }
 
+struct node * at_end(struct node * end_pointer,int data)
+{
+    struct node * ptr=(struct node *)malloc(sizeof(struct node));
+    struct node * p= end_pointer;
+    ptr->data=data;
+    p->next=ptr;
+    ptr->next=NULL;
+    
+}
 
-int main(){
+int main()
+{
 
     struct node * head;
     struct node * second;
@@ -46,19 +45,18 @@ int main(){
     head->data=50;
     head->next=second;
 
-    second->data=55;
+    second->data=60;
     second->next=third;
 
-    third->data=60;
+    third->data=70;
     third->next=fourth;
 
-    fourth->data=65;
+    fourth->data=80;
     fourth->next=NULL;
 
+    printf("This is the former inked list\n");
     traversal(head);
-    head=insertatend(head,56);
-    printf("\n\nafter inserton\n");
+    printf("\nThis is the new linked list\n");
+    fourth=at_end(fourth,101);
     traversal(head);
-
-    return 0;  
 }
