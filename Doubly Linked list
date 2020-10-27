@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node * next;
+    struct node * back;
+};
+
+struct node * traversal(struct node * head)
+{
+    struct node * ptr=(struct node *)malloc(sizeof(struct node));
+    ptr=head;
+    while (ptr!=NULL)
+    {
+        printf("Element is %d\n",ptr->data);
+        ptr=ptr->next;
+    }
+    
+}
+
+struct node * backtraversal(struct node * last)
+{
+     struct node * ptr=(struct node *)malloc(sizeof(struct node));
+     ptr=last;
+     while (ptr!=NULL)
+     {
+         printf("Element is %d\n",ptr->data);
+         ptr=ptr->back;
+     }
+     
+}
+
+int main()
+{
+    struct node * head =(struct node *)malloc(sizeof(struct node));
+    struct node * second=(struct node *)malloc(sizeof(struct node));
+    struct node * third=(struct node *)malloc(sizeof(struct node));
+    struct node * fourth=(struct node *)malloc(sizeof(struct node));
+
+    head->data=10;
+    head->next=second;
+    head->back=NULL;
+
+    second->data=20;
+    second->next=third;
+    second->back=head;
+   
+    third->data=30;
+    third->next=fourth;
+    third->back=second;
+   
+    fourth->data=40;
+    fourth->next=NULL;
+    fourth->back=third;
+    
+    printf("Former linked list\n");
+    traversal(head);
+    printf("This is back traversal \n");
+    backtraversal(fourth);
+    return 0;
+}
+
