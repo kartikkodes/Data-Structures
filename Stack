@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct stack
+{
+    int size;
+    int top;
+    int *arr;
+};
+
+/*Checking underlow condition*/
+int empty(struct stack *ptr)
+{
+    if (ptr->top == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+/*Checking overflow condition*/
+int full(struct stack *ptr)
+{
+    if (ptr->top == ptr->size - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+/*Push Function*/
+void push(struct stack *ptr, int val)
+{
+    if (full(ptr))
+    {
+        printf("Stack overflow , Cannot push %d into the stack\n", val);
+    }
+    else
+    {
+        {
+            ptr->top++;
+            ptr->arr[ptr->top] = val;
+        }
+    }
+}
+
+/*Pop Function*/
+int pop(struct stack *ptr)
+{
+    if (empty(ptr))
+    {
+        printf("Stack Underflow\n");
+        return -1;
+    }
+    else
+    {
+        int val = ptr->arr[ptr->top];
+        ptr->top--;
+        return val;
+    }
+}
+
+/*Main Function*/
+int main()
+{
+    struct stack *s;
+    s = (struct stack *)malloc(sizeof(struct stack));
+
+    s->size = 5;
+    s->top = -1;
+    s->arr = (int *)malloc(s->size * (sizeof(int)));
+
+    /*Pushing e;ements into the stack s */
+    push(s, 16);
+    push(s, 26);
+    push(s, 36);
+    push(s, 46);
+    push(s, 56);
+    push(s, 66);
+
+    //Checking  underflow and ovverflow conditions
+    printf("For all the conditions , 0 is false and 1 is true\n");
+    printf("Checking the full conition : %d\n", full(s));
+    printf("Checking the empty condition : %d\n", empty(s)); //0 false, 1 true
+
+    if (empty(s))
+    {
+        printf("Cannot go further\n");
+    }
+    else
+    {
+        printf("REady to go futher\n");
+    }
+    while (s->top != -1)
+    {
+        printf("%d item popped\n", pop(s));
+    }
+
+    if (empty(s))
+    {
+        printf("Cannot go further!!STACK UNDERFLOW\n");
+    }
+    else
+    {
+        printf("REady to go further\n");
+    }
+
+    //Printing elements of stack
+    printf("ELEMNT IN STACK ARE BELOW \n");
+    while (s->top != s->size - 1)
+    {
+        printf("Element is %d\n", s->arr[s->top + 1]);
+        s->top++;
+    }
+}
