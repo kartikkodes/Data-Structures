@@ -84,6 +84,14 @@ int main()
     push(s, 56);
     push(s, 66);
 
+    //Printing elements of stack
+    s->top=-1;  //Because top is equal to size when we pushed elements in the stack,so this needs to be done.
+    printf("ELEMNT IN STACK ARE BELOW \n");
+    while (s->top != s->size - 1)
+    {
+        printf("Element is %d\n", s->arr[s->top + 1]);
+        s->top++;
+    }
     //Checking  underflow and ovverflow conditions
     printf("For all the conditions , 0 is false and 1 is true\n");
     printf("Checking the full conition : %d\n", full(s));
@@ -111,11 +119,4 @@ int main()
         printf("REady to go further\n");
     }
 
-    //Printing elements of stack
-    printf("ELEMNT IN STACK ARE BELOW \n");
-    while (s->top != s->size - 1)
-    {
-        printf("Element is %d\n", s->arr[s->top + 1]);
-        s->top++;
-    }
 }
