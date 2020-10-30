@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct stack
+{
+    int size;
+    int top;
+    int *arr;
+};
+
+//Full function
+int full(struct stack *ptr)
+{
+    if (ptr->top == ptr->size - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//Push function
+void push(struct stack *ptr, int val)
+{
+    if (full(ptr))
+    {
+        printf("Stack Overflow!!Cannot push %d into the stack\n", val);
+    }
+    else
+    {
+        ptr->top++;
+        ptr->arr[ptr->top] = val;
+    }
+}
+
+//Empty function
+int empty(struct stack *ptr)
+{
+    if (ptr->top == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//Pop function
+int pop(struct stack *ptr)
+{
+    if (empty(ptr))
+    {
+        printf("Stack underflow\n");
+        return 1;
+    }
+    else
+    {
+        int val = ptr->arr[ptr->top];
+        ptr->top--;
+        return val;
+    }
+}
+//*************************************Stack Top*********************************************
+//StackTop function
+int stacktop(struct stack * ptr)
+{
+    ptr->top==ptr->size-1;
+    return ptr->arr[ptr->top];
+}
+
+//***********************************Stack Bottom********************************************
+//StackBottom function
+int stackBot(struct stack * ptr)
+{
+    ptr->top=0;
+    return ptr->arr[ptr->top];
+}
+
+int main()
+{
+    struct stack *s;
+    s = (struct stack *)malloc(sizeof(struct stack));
+
+    s->size = 5;
+    s->top = -1;
+    s->arr = (int *)malloc(sizeof(int));
+
+    push(s, 10);
+    push(s, 20);
+    push(s, 30);
+    push(s, 40);
+    push(s, 50);
+
+    s->top = -1;
+
+    printf("\n\n----Here printing all the elemnts in the stack\n");
+    while (s->top != s->size - 1)
+    {
+        printf("Element is %d\n", s->arr[s->top + 1]);
+        s->top++;
+    }
+
+    printf("\n\n---Now begining poping---\n");
+
+    // while (s->top != -1)
+    // {
+    //     printf("Element %d popped\n", pop(s));
+    // }
+
+    printf("Value of stack top is %d\n",stacktop(s));
+    printf("Value of stack bottom is %d\n",stackBot(s));
+
+}
