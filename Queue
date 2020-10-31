@@ -1,0 +1,120 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct queue
+{
+    int size;
+    int f;
+    int r;
+    int * arr;
+};
+//Full function
+int full(struct queue *q)
+{
+    if(q->r==q->size-1 && q->r!=q->f && q->f==-1)  //when you will full the queue , r will point on size-1 ||| But while dequeing f will also points to size-1 ||| And f=-1 means no dequeuing has been done till now therefore elements are full and no element is removed
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+    
+}
+//Enqueue function
+void enqueue(struct queue *q,int val)
+{
+    if(full(q))
+    {
+        printf("Queue is full");
+    }
+    else
+    {
+        q->r++;
+        q->arr[q->r]=val;
+    }
+    
+}
+//Empty function
+int empty(struct queue * q)
+{
+    if(q->r==q->f)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+    
+}
+
+//Dequeue function
+int dequeue(struct queue * q)
+{
+    int a=-1;
+    if(empty(q))
+    {
+        printf("Queue is full\n");
+    }
+    else
+    {
+       q->f++;
+      a= q->arr[q->f];
+    }
+    return a;
+}
+
+int main()
+{
+    struct queue *q;
+    q=(struct queue *)malloc(sizeof(struct queue));
+    q->size=5;
+    q->f=q->r=-1;
+    q->arr=(int *)malloc(q->size* sizeof(int));
+
+    printf("Beginning enqueueing\n");
+    enqueue(q,10);
+    enqueue(q,20);
+    enqueue(q,30);
+    enqueue(q,40);
+    enqueue(q,50);
+    enqueue(q,60); //Here overflow condition will occur
+
+    printf("Initializing the Printing process of queue\n");  //This part if for printing queue
+    q->r=-1;
+    while (q->r!=q->size-1)
+    {
+        printf("Element is %d\n",q->arr[q->r+1]);
+        q->r++;
+    }
+    
+    printf("Initializing the dequeuing process\n");
+    
+    printf("Dequeing elemnt %d \n",dequeue(q));
+    printf("Dequeing elemnt %d \n",dequeue(q));
+    printf("Dequeing elemnt %d \n",dequeue(q));
+    printf("Dequeing elemnt %d \n",dequeue(q));
+   printf("Dequeing elemnt %d \n",dequeue(q));
+   
+   /*All the elements removed by now and 
+    q->r will point on size-1 so do q->f so
+    q->r==q->f that means queuee should be empty
+    Let's check!
+   */
+   
+   printf("Initializing checking process\n");
+ 
+    if (empty(q))
+    {
+        printf("Queue is empty\n");
+    }
+    if(full(q))
+    {
+        printf("Queue is full"); 
+    }
+    
+    //If even one less elements are dequeued , queue is neither empty nor full.
+
+    return 0;
+}
