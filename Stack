@@ -93,9 +93,9 @@ int main()
         s->top++;
     }
     //Checking  underflow and ovverflow conditions
-    printf("For all the conditions , 0 is false and 1 is true\n");
+    printf("For all the conditions , 1 is false and 0 is true\n");
     printf("Checking the full conition : %d\n", full(s));
-    printf("Checking the empty condition : %d\n", empty(s)); //0 false, 1 true
+    printf("Checking the empty condition : %d\n", empty(s)); //1 false, 0 true
 
     if (empty(s))
     {
